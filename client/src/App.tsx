@@ -1,6 +1,9 @@
 import React /*, { useState, useEffect }*/ from "react";
 // import axios from "axios";
 
+// import page routing
+import Router from "./components/Router";
+
 // interface Data {
 //   id: string;
 //   name: string;
@@ -16,7 +19,11 @@ const App = () => {
   //     .catch((err) => console.log(err));
   // }, []);
 
-  return <div className="app__wrapper"></div>;
+  return (
+    <div className="app__wrapper">
+      <Router />
+    </div>
+  );
 };
 
 export default App;
