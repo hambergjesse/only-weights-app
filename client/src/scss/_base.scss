@@ -1,0 +1,77 @@
+// colour scheme
+$brand-main: #8b0e0e;
+$brand-main-soft: #ffb1b1;
+$brand-main-bright: #f84848;
+$brand-main-light: #ab1010;
+$brand-main-active: #790000;
+$brand-main-dark: #460000;
+$brand-main-nearly-black: #0e0e0e;
+$brand-main-white: #ffffff;
+$brand-link: #a40404;
+$brand-link-disabled: #767676;
+
+// font family + sizing
+$base-font-size: 16px;
+$base-font-size-mobile: 14px;
+$main-font-family: Helvetica, Arial, sans-serif;
+
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+html {
+  body {
+    overflow-x: hidden;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: $brand-main-nearly-black;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: $brand-main-white;
+      font-family: $main-font-family;
+    }
+
+    label,
+    li,
+    p,
+    a {
+      color: $brand-main-white;
+      font-family: $main-font-family;
+      font-size: $base-font-size-mobile;
+      letter-spacing: 1px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+.app__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
