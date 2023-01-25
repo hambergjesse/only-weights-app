@@ -5,15 +5,17 @@ $brand-main-bright: #ffc928;
 $brand-main-light: #ffb347;
 $brand-main-active: #e6a000;
 $brand-main-dark: #cc8f00;
-$brand-main-nearly-black: #0e0e0e;
+$brand-main-nearly-black: #171717;
 $brand-main-white: #ffffff;
 $brand-link: #ff8c00;
 $brand-link-disabled: #767676;
 
 // font family + sizing
+$branding-font: "fit", sans-serif;
 $base-font-size: 16px;
 $base-font-size-mobile: 14px;
-$main-font-family: Helvetica, Arial, sans-serif;
+$main-font-family-titles: citrus-gothic, sans-serif;
+$main-font-family-subtext: Corbel, sans-serif;
 
 * {
   margin: 0px;
@@ -49,7 +51,7 @@ html {
     h5,
     h6 {
       color: $brand-main-white;
-      font-family: $main-font-family;
+      font-family: $main-font-family-titles;
     }
 
     label,
@@ -57,7 +59,7 @@ html {
     p,
     a {
       color: $brand-main-white;
-      font-family: $main-font-family;
+      font-family: $main-font-family-subtext;
       font-size: $base-font-size-mobile;
       letter-spacing: 1px;
     }

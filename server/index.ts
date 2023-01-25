@@ -1,13 +1,28 @@
 // installed packages
 import express, { Express, Request, Response } from "express";
 const { MongoClient, Collection } = require("mongodb");
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import cors from "cors";
+const bodyParser = require("body-parser");
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
 const uri = process.env.MONGODB_URI;
+const jwtToken: string = process.env.JWT_SECRET as string;
+
+// specify who can access
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
+// make app use parser
+app.use(bodyParser.json());
 
 // MongoDB variables
 let db: any, collection: typeof Collection;
@@ -23,19 +38,56 @@ client.connect((err: Error) => {
     console.error(err);
     return;
   }
-  db = client.db("sample_analytics");
-  collection = db.collection("customers");
+  db = client.db("only-weights-app");
+  collection = db.collection("users");
 });
 
-app.get("/api", (req: Request, res: Response) => {
-  collection.find().toArray((err: Error, data: any[]) => {
+// app.get("/api", (req: Request, res: Response) => {
+//   collection.find().toArray((err: Error, data: any[]) => {
+//     if (err) {
+//       console.error(err);
+//       res.status(500).json({ err: err });
+//       return;
+//     }
+//     res.status(200).json(data);
+//   });
+// });
+
+app.post("/register", async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  collection.insertOne({ email, password: hashedPassword }, (err: Error) => {
     if (err) {
       console.error(err);
-      res.status(500).json({ err: err });
+      res.status(500).json({ message: "Error registering user" });
       return;
     }
-    res.status(200).json(data);
+
+    const token = jwt.sign({ email }, jwtToken);
+
+    res.json({ token });
   });
+});
+
+app.post("/login", async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  const user = await collection.findOne({ email });
+
+  if (!user) {
+    res.status(401).json({ message: "Email or password is incorrect" });
+    return;
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) {
+    res.status(401).json({ message: "Email or password is incorrect" });
+    return;
+  }
+
+  const token = jwt.sign({ email }, jwtToken);
+
+  res.json({ token });
 });
 
 app.listen(port, () => {
