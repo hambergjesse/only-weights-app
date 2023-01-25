@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -14,6 +17,12 @@ const LoginForm = () => {
         password,
       });
       localStorage.setItem("token", response.data.token);
+
+      if (!localStorage.getItem("token")) {
+        navigate("/login");
+      }
+      navigate("/home");
+
       // redirect the user to the dashboard or some other protected route
     } catch (err: any) {
       setError(err.response.data.message);

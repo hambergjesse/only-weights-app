@@ -46,16 +46,16 @@ client.connect((err) => {
     db = client.db("only-weights-app");
     collection = db.collection("users");
 });
-// app.get("/api", (req: Request, res: Response) => {
-//   collection.find().toArray((err: Error, data: any[]) => {
-//     if (err) {
-//       console.error(err);
-//       res.status(500).json({ err: err });
-//       return;
-//     }
-//     res.status(200).json(data);
-//   });
-// });
+app.get("/api", (req, res) => {
+    collection.find().toArray((err, data) => {
+        if (err) {
+            console.error(err);
+            res.status(500).json({ err: err });
+            return;
+        }
+        res.status(200).json(data);
+    });
+});
 app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
@@ -65,8 +65,8 @@ app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* 
             res.status(500).json({ message: "Error registering user" });
             return;
         }
-        const token = jsonwebtoken_1.default.sign({ email }, jwtToken);
-        res.json({ token });
+        //const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
+        //res.json({ token });
     });
 }));
 app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -81,9 +81,32 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(401).json({ message: "Email or password is incorrect" });
         return;
     }
-    const token = jsonwebtoken_1.default.sign({ email }, jwtToken);
+    const token = jsonwebtoken_1.default.sign({ email }, jwtToken, { expiresIn: "1h" });
     res.json({ token });
 }));
+app.get("/api/user-data", (req, res) => {
+    var _a;
+    const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+    if (!token) {
+        res.status(401).json({ message: "Invalid token" });
+        return;
+    }
+    try {
+        const decoded = jsonwebtoken_1.default.verify(token, jwtToken);
+        collection.findOne({ email: decoded.email }, (err, user) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ message: "Error retrieving user data" });
+                return;
+            }
+            res.json(user);
+        });
+    }
+    catch (err) {
+        res.status(401).json({ message: "Invalid token" });
+        return;
+    }
+});
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
     client.close();

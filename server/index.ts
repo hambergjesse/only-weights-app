@@ -42,16 +42,16 @@ client.connect((err: Error) => {
   collection = db.collection("users");
 });
 
-// app.get("/api", (req: Request, res: Response) => {
-//   collection.find().toArray((err: Error, data: any[]) => {
-//     if (err) {
-//       console.error(err);
-//       res.status(500).json({ err: err });
-//       return;
-//     }
-//     res.status(200).json(data);
-//   });
-// });
+app.get("/api", (req: Request, res: Response) => {
+  collection.find().toArray((err: Error, data: any[]) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ err: err });
+      return;
+    }
+    res.status(200).json(data);
+  });
+});
 
 app.post("/register", async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -64,9 +64,9 @@ app.post("/register", async (req: Request, res: Response) => {
       return;
     }
 
-    const token = jwt.sign({ email }, jwtToken);
+    //const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
 
-    res.json({ token });
+    //res.json({ token });
   });
 });
 
@@ -85,9 +85,33 @@ app.post("/login", async (req: Request, res: Response) => {
     return;
   }
 
-  const token = jwt.sign({ email }, jwtToken);
+  const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
 
   res.json({ token });
+});
+
+app.get("/api/user-data", (req: Request, res: Response) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
+  try {
+    const decoded = jwt.verify(token, jwtToken) as { email: string };
+
+    collection.findOne({ email: decoded.email }, (err: any, user: any) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error retrieving user data" });
+        return;
+      }
+
+      res.json(user);
+    });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
 });
 
 app.listen(port, () => {
