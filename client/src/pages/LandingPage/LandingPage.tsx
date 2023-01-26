@@ -11,7 +11,7 @@ const LandingPage = () => {
   });
 
   return (
-    <div className="landingPage__wrapper">
+    <main className="landingPage__wrapper">
       <div className="landingPage__container">
         <button
           onClick={() => {
@@ -21,7 +21,7 @@ const LandingPage = () => {
           CONTINUE
         </button>
       </div>
-    </div>
+    </main>
   );
 };
 

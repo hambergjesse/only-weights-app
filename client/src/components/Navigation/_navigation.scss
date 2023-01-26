@@ -1,0 +1,33 @@
+.navigation__wrapper {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  bottom: 0;
+
+  .navigation__container {
+    background-color: $brand-main-nearly-black;
+    border-top: 2px solid $brand-main-dark;
+    padding: 24px 22px 24px 24px;
+    height: 75px;
+    width: 100%;
+
+    .navigation__container--nav {
+      height: 100%;
+      .navigation__container--nav-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        .navigation__container--nav-list-item {
+          height: 100%;
+          width: 26px;
+          .react-icon {
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

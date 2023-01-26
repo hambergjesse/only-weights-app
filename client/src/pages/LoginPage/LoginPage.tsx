@@ -11,11 +11,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="loginPage__wrapper">
+    <main className="loginPage__wrapper">
       <div className="loginPage__container">
         <LoginForm />
       </div>
-    </div>
+    </main>
   );
 };
 

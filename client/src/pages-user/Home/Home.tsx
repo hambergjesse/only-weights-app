@@ -2,6 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
+// import components
+import Navigation from "../../components/Navigation/Navigation";
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -20,7 +23,12 @@ const Home = () => {
     });
   });
 
-  return <></>;
+  return (
+    <main className="homePage__wrapper">
+      <div className="homePage__container"></div>
+      <Navigation />
+    </main>
+  );
 };
 
 export default Home;

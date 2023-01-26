@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import Home from "../userPages/Home/Home";
+import Home from "../pages-user/Home/Home";
 
 const PageRouter: React.FC = () => {
   let location = useLocation();
