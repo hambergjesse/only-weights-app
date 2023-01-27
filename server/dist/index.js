@@ -82,7 +82,10 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return;
     }
     const token = jsonwebtoken_1.default.sign({ email }, jwtToken, { expiresIn: "1h" });
-    res.json({ token });
+    // set user id
+    // const userId = user.id;
+    // send back user's token and Id
+    res.json({ token: token /*, userId: userId*/ });
 }));
 app.get("/api/user-data", (req, res) => {
     var _a;

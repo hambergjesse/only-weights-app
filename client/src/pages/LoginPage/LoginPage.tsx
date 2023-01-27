@@ -1,14 +1,17 @@
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+// import sub component
 import LoginForm from "./LoginForm/LoginForm";
 
-const LoginPage = () => {
+const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const verifyAuth = () => {
+  useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/home");
     }
-  };
+  });
 
   return (
     <main className="loginPage__wrapper">

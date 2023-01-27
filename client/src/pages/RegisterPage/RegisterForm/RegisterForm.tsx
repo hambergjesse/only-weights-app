@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
+// import api
+import api from "../../../services/api";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState<string>("");
@@ -16,7 +18,7 @@ const RegisterForm = () => {
     // check if passwords match and then continue
     if (password === confirmPassword) {
       try {
-        const response = await axios.post("http://localhost:8000/register", {
+        const response = await api.post("/register", {
           email,
           password,
         });

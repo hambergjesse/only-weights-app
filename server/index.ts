@@ -87,7 +87,11 @@ app.post("/login", async (req: Request, res: Response) => {
 
   const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
 
-  res.json({ token });
+  // set user id
+  // const userId = user.id;
+
+  // send back user's token and Id
+  res.json({ token: token /*, userId: userId*/ });
 });
 
 app.get("/api/user-data", (req: Request, res: Response) => {
@@ -99,7 +103,7 @@ app.get("/api/user-data", (req: Request, res: Response) => {
   try {
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
-    collection.findOne({ email: decoded.email }, (err: any, user: any) => {
+    collection.findOne({ email: decoded.email }, (err: Error, user: string) => {
       if (err) {
         console.error(err);
         res.status(500).json({ message: "Error retrieving user data" });

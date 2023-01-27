@@ -1,11 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { UserDataContext } from "../../components/UserContextProvider";
 import axios from "axios";
 
 // import components
 import Navigation from "../../components/Navigation/Navigation";
 
 const Home = () => {
+  const { userData, fetchUserData }: any = useContext(UserDataContext);
+
+  useEffect(() => {
+    fetchUserData(1);
+  }, []);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +32,9 @@ const Home = () => {
 
   return (
     <main className="homePage__wrapper">
-      <div className="homePage__container"></div>
+      <div className="homePage__container">
+        <h1>{userData.email}</h1>
+      </div>
       <Navigation />
     </main>
   );
