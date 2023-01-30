@@ -3,8 +3,14 @@ import { useUserDataContext } from "../../components/ContextProvider";
 // import components
 import Navigation from "../../components/Navigation/Navigation";
 
+// import necessary hooks/functions
+import useFetchUserData from "../../services/fetchUserData";
+
 const Home = () => {
   const { userData } = useUserDataContext();
+
+  // fetch user-data
+  useFetchUserData();
 
   return (
     <main className="homePage__wrapper">

@@ -8,46 +8,17 @@ import LandingPage from "../pages/LandingPage/LandingPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import Home from "../pages-user/Home/Home";
 
-import api from "../services/api";
-
-// import auth context
+// import auth + user data context
 import { useUserAuthContext } from "./ContextProvider";
-import { useUserDataContext } from "./ContextProvider";
 
 const PageRouter: React.FC = () => {
-  // user data context
-  const { setUserData } = useUserDataContext();
-
   const { isAuth, setIsAuth } = useUserAuthContext();
-
-  // get jwt token from local storage
-  const token = localStorage.getItem("token");
-
-  // fetch and set user-data with jwt token
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await api.get("/api/user-data", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUserData({
-          _id: res.data._id,
-          email: res.data.email,
-          password: res.data.password,
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, [setUserData, token]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      setIsAuth(true);
+      return setIsAuth(true);
     }
-    console.log("isAuth updated" + isAuth);
+    return setIsAuth(false);
   }, [isAuth, setIsAuth]);
 
   return (
