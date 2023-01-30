@@ -2,7 +2,7 @@
 import Router from "./components/Router";
 
 // import user data context
-import UserProvider from "./components/UserContextProvider";
+import UserProvider from "./components/ContextProvider";
 
 const App = () => {
   return (

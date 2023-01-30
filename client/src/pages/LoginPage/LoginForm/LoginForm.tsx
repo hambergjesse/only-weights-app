@@ -1,24 +1,24 @@
 // import react dependencies
-import React from "react";
+import React, { useState } from "react";
 
 // import react dependencies
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
 
 // import api
 import api from "../../../services/api";
 
 // import context for userId storage
-import { UserIdContext } from "../../../components/UserContextProvider";
+// import { useUserIdContext } from "../../../components/UserContextProvider";
 
 // import context for session/router auth
-import { UserAuthContext } from "../../../components/UserContextProvider";
+import { useUserAuthContext } from "../../../components/ContextProvider";
 
 const LoginForm = () => {
   // user index/id context
-  const { userId, setUserId }: any = useContext(UserIdContext);
+  //const { userId, setUserId } = useUserIdContext();
 
-  const { setIsAuth }: any = useContext(UserAuthContext);
+  // user auth context
+  const { isAuth, setIsAuth } = useUserAuthContext();
 
   // form input states
   const [email, setEmail] = useState<string>("");
@@ -43,10 +43,12 @@ const LoginForm = () => {
 
       // if no token => login page || if token => home page
       if (!localStorage.getItem("token")) {
-        return setIsAuth(false) && navigate("/");
+        setIsAuth(false);
+        navigate("/");
       }
 
-      return setIsAuth(true) && navigate("/home");
+      setIsAuth(true);
+      navigate("/home");
 
       // redirect the user to the dashboard or some other protected route
     } catch (err: any) {
