@@ -1,9 +1,28 @@
 import React, { useState, useContext } from "react";
 
-// import api
-import api from "../services/api";
+// data context
 
-export const UserDataContext = React.createContext({});
+export interface UserData {
+  _id: string;
+  email: string;
+  password: string;
+}
+
+export interface DataContext {
+  userData: UserData;
+  setUserData: React.Dispatch<React.SetStateAction<UserData>>;
+}
+
+const dataDefault: DataContext = {
+  userData: {
+    _id: "",
+    email: "",
+    password: "",
+  },
+  setUserData: () => {},
+};
+
+export const UserDataContext = React.createContext(dataDefault);
 
 // auth context
 interface AuthContext {
@@ -11,35 +30,23 @@ interface AuthContext {
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const defaultState: AuthContext = {
+const authDefault: AuthContext = {
   isAuth: false,
   setIsAuth: () => {},
 };
 
-export const UserAuthContext = React.createContext(defaultState);
-
-export const UserIdContext = React.createContext("");
+export const UserAuthContext = React.createContext(authDefault);
 
 const UserProvider = ({ children }: any) => {
-  const [userData, setUserData] = useState({});
-  const [isAuth, setIsAuth] = useState(defaultState.isAuth);
-  const [userId, setUserId] = useState("");
-
-  async function fetchUserData(id: object) {
-    const response = await api.get(`/api/users/${id}`);
-    setUserData(response.data);
-  }
+  const [userData, setUserData] = useState<UserData>(dataDefault.userData);
+  const [isAuth, setIsAuth] = useState(authDefault.isAuth);
 
   return (
     <UserAuthContext.Provider value={{ isAuth, setIsAuth }}>
       <UserDataContext.Provider
         value={{
           userData,
-          fetchUserData,
-          setIsAuth,
-          isAuth,
-          userId,
-          setUserId,
+          setUserData,
         }}
       >
         {children}
@@ -52,4 +59,3 @@ export default UserProvider;
 
 export const useUserDataContext = () => useContext(UserDataContext);
 export const useUserAuthContext = () => useContext(UserAuthContext);
-export const useUserIdContext = () => useContext(UserIdContext);

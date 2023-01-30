@@ -42,16 +42,12 @@ client.connect((err: Error) => {
   collection = db.collection("users");
 });
 
-app.get("/api", (req: Request, res: Response) => {
-  collection.find().toArray((err: Error, data: any[]) => {
-    if (err) {
-      console.error(err);
-      res.status(500).json({ err: err });
-      return;
-    }
-    res.status(200).json(data);
-  });
-});
+// establish User interface
+export interface User {
+  _id: string;
+  email: string;
+  password: string;
+}
 
 app.post("/register", async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -87,11 +83,8 @@ app.post("/login", async (req: Request, res: Response) => {
 
   const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
 
-  // set user id
-  // const userId = user.id;
-
-  // send back user's token and Id
-  res.json({ token: token /*, userId: userId*/ });
+  // send back user's token
+  res.json({ token: token });
 });
 
 app.get("/api/user-data", (req: Request, res: Response) => {
@@ -103,14 +96,15 @@ app.get("/api/user-data", (req: Request, res: Response) => {
   try {
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
-    collection.findOne({ email: decoded.email }, (err: Error, user: string) => {
+    collection.findOne({ email: decoded.email }, (err: Error, user: any) => {
       if (err) {
         console.error(err);
         res.status(500).json({ message: "Error retrieving user data" });
         return;
       }
 
-      res.json(user);
+      res.json({ _id: user._id, email: user.email, password: user.password });
+      console.log(user);
     });
   } catch (err) {
     res.status(401).json({ message: "Invalid token" });

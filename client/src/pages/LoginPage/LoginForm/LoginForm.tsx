@@ -1,5 +1,5 @@
 // import react dependencies
-import React, { useState } from "react";
+import { useState } from "react";
 
 // import react dependencies
 import { useNavigate } from "react-router-dom";
@@ -7,18 +7,12 @@ import { useNavigate } from "react-router-dom";
 // import api
 import api from "../../../services/api";
 
-// import context for userId storage
-// import { useUserIdContext } from "../../../components/UserContextProvider";
-
-// import context for session/router auth
+// import context for session/router auth + data
 import { useUserAuthContext } from "../../../components/ContextProvider";
 
 const LoginForm = () => {
-  // user index/id context
-  //const { userId, setUserId } = useUserIdContext();
-
   // user auth context
-  const { isAuth, setIsAuth } = useUserAuthContext();
+  const { setIsAuth } = useUserAuthContext();
 
   // form input states
   const [email, setEmail] = useState<string>("");
@@ -38,19 +32,21 @@ const LoginForm = () => {
       // send token to localstorage
       localStorage.setItem("token", response.data.token);
 
-      // store userId in context to be used "globally"
-      // setUserId(response.data.userId);
-
       // if no token => login page || if token => home page
       if (!localStorage.getItem("token")) {
         setIsAuth(false);
         navigate("/");
       }
 
-      setIsAuth(true);
-      navigate("/home");
+      try {
+        // enable auth for protected routes
+        setIsAuth(true);
 
-      // redirect the user to the dashboard or some other protected route
+        // send user to home page
+        navigate("/home");
+      } catch (error) {
+        console.log("user-data fetch and set func no worky");
+      }
     } catch (err: any) {
       setError(err.response.data.message);
     }

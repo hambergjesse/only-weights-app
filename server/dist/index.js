@@ -46,16 +46,6 @@ client.connect((err) => {
     db = client.db("only-weights-app");
     collection = db.collection("users");
 });
-app.get("/api", (req, res) => {
-    collection.find().toArray((err, data) => {
-        if (err) {
-            console.error(err);
-            res.status(500).json({ err: err });
-            return;
-        }
-        res.status(200).json(data);
-    });
-});
 app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
@@ -82,10 +72,8 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         return;
     }
     const token = jsonwebtoken_1.default.sign({ email }, jwtToken, { expiresIn: "1h" });
-    // set user id
-    // const userId = user.id;
-    // send back user's token and Id
-    res.json({ token: token /*, userId: userId*/ });
+    // send back user's token
+    res.json({ token: token });
 }));
 app.get("/api/user-data", (req, res) => {
     var _a;
@@ -102,7 +90,8 @@ app.get("/api/user-data", (req, res) => {
                 res.status(500).json({ message: "Error retrieving user data" });
                 return;
             }
-            res.json(user);
+            res.json({ _id: user._id, email: user.email, password: user.password });
+            console.log(user);
         });
     }
     catch (err) {
