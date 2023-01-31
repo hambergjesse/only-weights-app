@@ -1,6 +1,12 @@
 .app__wrapper {
   .landingPage__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+
     .landingPage__container {
+      text-align: center;
     }
   }
 }
