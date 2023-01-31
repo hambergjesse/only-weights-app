@@ -1,0 +1,82 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * citrus-gothic:
+ *   - http://typekit.com/eulas/00000000000000007736d7cd
+ *   - http://typekit.com/eulas/00000000000000007736d7c9
+ * fit:
+ *   - http://typekit.com/eulas/00000000000000007735af77
+ *
+ * © 2009-2022 Adobe Systems Incorporated. All Rights Reserved.
+ */
+
+/*{"last_published":"2023-01-25 13:39:33 UTC"}*/
+
+/*@import url("https://p.typekit.net/p.css?s=1&k=sqg6hva&ht=tk&f=32458.50413.50414&a=139415615&app=typekit&e=css");*/
+
+@font-face {
+  font-family: "fit";
+  src: url("https://use.typekit.net/af/915537/00000000000000007735af77/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/915537/00000000000000007735af77/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/915537/00000000000000007735af77/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "citrus-gothic";
+  src: url("https://use.typekit.net/af/0575e6/00000000000000007736d7cd/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/0575e6/00000000000000007736d7cd/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/0575e6/00000000000000007736d7cd/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: "citrus-gothic";
+  src: url("https://use.typekit.net/af/63ffa4/00000000000000007736d7c9/30/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff2"),
+    url("https://use.typekit.net/af/63ffa4/00000000000000007736d7c9/30/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("woff"),
+    url("https://use.typekit.net/af/63ffa4/00000000000000007736d7c9/30/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3")
+      format("opentype");
+  font-display: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+}
+
+.tk-fit {
+  font-family: "fit", sans-serif;
+}
+
+/*
+.tk-citrus-gothic {
+  font-family: "citrus-gothic", sans-serif;
+}
+.tk-citrus-gothic-inline {
+  font-family: "citrus-gothic-inline", sans-serif;
+}
+.tk-citrus-gothic-rough {
+  font-family: "citrus-gothic-rough", sans-serif;
+}
+.tk-citrus-gothic-shadow {
+  font-family: "citrus-gothic-shadow", sans-serif;
+}
+.tk-citrus-gothic-solid {
+  font-family: "citrus-gothic-solid", sans-serif;
+}
+*/

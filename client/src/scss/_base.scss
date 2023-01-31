@@ -36,6 +36,20 @@ button:focus {
   outline: none;
 }
 
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  -webkit-appearance: none;
+  font-family: $main-font-family-titles;
+}
+
 html {
   body {
     overflow-x: hidden;
@@ -54,6 +68,9 @@ html {
       font-family: $main-font-family-titles;
     }
 
+    textarea,
+    select,
+    input,
     label,
     li,
     p,
@@ -61,7 +78,6 @@ html {
       color: $brand-main-white;
       font-family: $main-font-family-subtext;
       font-size: $base-font-size-mobile;
-      letter-spacing: 1px;
     }
 
     img {
@@ -74,6 +90,6 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
   height: 100%;
+  width: 100%;
 }

@@ -1,0 +1,14 @@
+.background__wrapper {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 21%;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}

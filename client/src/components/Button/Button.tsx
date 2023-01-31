@@ -6,7 +6,11 @@ interface ButtonFace {
 
 export const Button = (props: ButtonFace) => {
   return (
-    <button disabled={props.disabled} onClick={props.onClick}>
+    <button
+      className="default-button"
+      disabled={props.disabled}
+      onClick={props.onClick}
+    >
       {props.text}
     </button>
   );

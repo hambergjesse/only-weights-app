@@ -1,8 +1,15 @@
 // boilerplate and global styling import
 @import "base";
 
+// import for fonts
+@import "./fonts";
+
 // import for page styling
 @import "../pages/LandingPage/landingpage";
 
 // import for component styling
 @import "../components/Navigation/navigation";
+@import "../components/Button/button";
+@import "../components/Copyright/copyright";
+@import "../components/TextLogo/textLogo";
+@import "../components/Background/background";

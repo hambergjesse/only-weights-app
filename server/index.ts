@@ -89,10 +89,12 @@ app.post("/login", async (req: Request, res: Response) => {
 
 app.get("/api/user-data", (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
+
   if (!token) {
     res.status(401).json({ message: "Invalid token" });
     return;
   }
+
   try {
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
