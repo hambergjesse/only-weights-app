@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 // import api
 import api from "../../../services/api";
 
-const RegisterForm = () => {
+// import subcomponents
+import { Button } from "../../../components/Button/Button";
+
+export const RegisterForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -42,29 +45,34 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <button type="submit">Register</button>
-      {error && <p>{error}</p>}
-    </form>
+    <section className="registerForm__container">
+      <h1>REGISTER</h1>
+      <p>Create your OnlyWeights account</p>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        <Button text="Login" type="submit" />
+        {error && <p>{error}</p>}
+      </form>
+      <p>
+        Already have an account? <a href="/login">Log In</a>
+      </p>
+    </section>
   );
 };
-
-export default RegisterForm;

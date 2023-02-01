@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import RegisterForm from "./RegisterForm/RegisterForm";
+
+import { TextLogo } from "../../components/TextLogo/TextLogo";
+import { Copyright } from "../../components/Copyright/Copyright";
+import { RegisterForm } from "./RegisterForm/RegisterForm";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -12,9 +15,11 @@ const RegisterPage = () => {
   });
 
   return (
-    <div className="loginPage__wrapper">
-      <div className="loginPage__container">
+    <div className="registerPage__wrapper">
+      <div className="registerPage__container">
+        <TextLogo />
         <RegisterForm />
+        <Copyright />
       </div>
     </div>
   );

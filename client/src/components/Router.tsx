@@ -31,6 +31,7 @@ const PageRouter: React.FC = () => {
       ) : (
         <Route path="/" element={<LandingPage />} />
       )}
+      <Route path="*" element={<LandingPage />} />
     </Routes>
   );
 };
