@@ -9,6 +9,8 @@ $brand-main-nearly-black: #171717;
 $brand-main-white: #ffffff;
 $brand-link: #ff8c00;
 $brand-link-disabled: #767676;
+$brand-button-hover: #272727;
+$brand-error-text: #cc0000;
 
 // font family + sizing
 $branding-font: fit, sans-serif;
@@ -93,4 +95,8 @@ html {
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+
+.error-text {
+  color: $brand-error-text !important;
 }

@@ -67,8 +67,8 @@ export const RegisterForm = () => {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <Button text="Login" type="submit" />
-        {error && <p>{error}</p>}
+        <Button text="Register" type="submit" />
+        {error && <p className="error-text">{error}</p>}
       </form>
       <p>
         Already have an account? <a href="/login">Log In</a>

@@ -73,7 +73,7 @@ export const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button text="Login" type="submit" />
-        {error && <p>{error}</p>}
+        {error && <p className="error-text">{error}</p>}
       </form>
       <p>
         Not yet registered? <a href="/register">Sign Up</a>
