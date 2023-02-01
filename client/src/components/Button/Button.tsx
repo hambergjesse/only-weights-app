@@ -2,6 +2,7 @@ interface ButtonFace {
   text?: string;
   disabled?: boolean;
   onClick?: () => {} | void;
+  type?: "button" | "submit" | "reset";
 }
 
 export const Button = (props: ButtonFace) => {
@@ -10,6 +11,7 @@ export const Button = (props: ButtonFace) => {
       className="default-button"
       disabled={props.disabled}
       onClick={props.onClick}
+      type={props.type}
     >
       {props.text}
     </button>

@@ -10,7 +10,10 @@ import api from "../../../services/api";
 // import context for session/router auth + data
 import { useUserAuthContext } from "../../../components/ContextProvider";
 
-const LoginForm = () => {
+// import subcomponents
+import { Button } from "../../../components/Button/Button";
+
+export const LoginForm = () => {
   // user auth context
   const { setIsAuth } = useUserAuthContext();
 
@@ -53,23 +56,28 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-      {error && <p>{error}</p>}
-    </form>
+    <section className="loginForm__container">
+      <h1>LOGIN</h1>
+      <p>Please sign in to continue</p>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button text="Login" type="submit" />
+        {error && <p>{error}</p>}
+      </form>
+      <p>
+        Not yet registered? <a href="/register">Sign Up</a>
+      </p>
+    </section>
   );
 };
-
-export default LoginForm;
