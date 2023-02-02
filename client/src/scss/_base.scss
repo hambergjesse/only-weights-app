@@ -61,6 +61,10 @@ html {
     height: 100vh;
     background: $brand-main-nearly-black;
 
+    // disable scroll
+    overflow-x: hidden;
+    overflow-y: hidden;
+
     h1,
     h2,
     h3,

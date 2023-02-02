@@ -8,6 +8,7 @@ import api from "../../../services/api";
 import { Button } from "../../../components/Button/Button";
 
 export const RegisterForm = () => {
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -22,6 +23,7 @@ export const RegisterForm = () => {
     if (password === confirmPassword) {
       try {
         const response = await api.post("/register", {
+          name,
           email,
           password,
         });
@@ -50,21 +52,31 @@ export const RegisterForm = () => {
       <p>Create your OnlyWeights account</p>
       <form onSubmit={handleSubmit}>
         <input
+          type="name"
+          placeholder="First Name*"
+          value={name}
+          required
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
           type="email"
-          placeholder="Email"
+          placeholder="Email*"
           value={email}
+          required
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Password*"
           value={password}
+          required
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="password"
-          placeholder="Confirm Password"
+          placeholder="Confirm Password*"
           value={confirmPassword}
+          required
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <Button text="Register" type="submit" />

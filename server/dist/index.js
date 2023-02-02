@@ -47,16 +47,29 @@ client.connect((err) => {
     collection = db.collection("users");
 });
 app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, password } = req.body;
+    // get variables from front
+    const { name, email, password } = req.body;
+    // hash password
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
-    collection.insertOne({ email, password: hashedPassword }, (err) => {
+    // find user in database using their email
+    collection.findOne({ email: email }, (err, result) => {
         if (err) {
             console.error(err);
             res.status(500).json({ message: "Error registering user" });
             return;
         }
-        //const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
-        //res.json({ token });
+        if (result) {
+            res.status(400).json({ message: "Email already exists" });
+            return;
+        }
+        collection.insertOne({ email, password: hashedPassword, name }, (insertErr) => {
+            if (insertErr) {
+                console.error(insertErr);
+                res.status(500).json({ message: "Error registering user" });
+                return;
+            }
+            res.json({ message: "User registered successfully" });
+        });
     });
 }));
 app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {

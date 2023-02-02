@@ -50,19 +50,34 @@ export interface User {
 }
 
 app.post("/register", async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  // get variables from front
+  const { name, email, password } = req.body;
+  // hash password
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  collection.insertOne({ email, password: hashedPassword }, (err: Error) => {
+  // find user in database using their email
+  collection.findOne({ email: email }, (err: Error, result: Response) => {
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error registering user" });
       return;
     }
+    if (result) {
+      res.status(400).json({ message: "Email already exists" });
+      return;
+    }
 
-    //const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
-
-    //res.json({ token });
+    collection.insertOne(
+      { email, password: hashedPassword, name },
+      (insertErr: Error) => {
+        if (insertErr) {
+          console.error(insertErr);
+          res.status(500).json({ message: "Error registering user" });
+          return;
+        }
+        res.json({ message: "User registered successfully" });
+      }
+    );
   });
 });
 
