@@ -118,19 +118,29 @@ app.get("/api/user-data", (req: Request, res: Response) => {
     return;
   }
 
+  interface UserObj {
+    _id: string;
+    email: string;
+    password: string;
+    name: string;
+  }
+
   try {
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
-    collection.findOne({ email: decoded.email }, (err: Error, user: any) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ message: "Error retrieving user data" });
-        return;
-      }
+    collection.findOne(
+      { email: decoded.email },
+      (err: Error, user: UserObj) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ message: "Error retrieving user data" });
+          return;
+        }
 
-      res.json({ _id: user._id, email: user.email, name: user.name });
-      console.log(user);
-    });
+        // send userdata as a response obj to front
+        res.json({ email: user.email, name: user.name });
+      }
+    );
   } catch (err) {
     res.status(401).json({ message: "Invalid token" });
     return;

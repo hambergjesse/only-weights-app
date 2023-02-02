@@ -109,8 +109,8 @@ app.get("/api/user-data", (req, res) => {
                 res.status(500).json({ message: "Error retrieving user data" });
                 return;
             }
-            res.json({ _id: user._id, email: user.email, name: user.name });
-            console.log(user);
+            // send userdata as a response obj to front
+            res.json({ email: user.email, name: user.name });
         });
     }
     catch (err) {
