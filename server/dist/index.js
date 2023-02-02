@@ -1,20 +1,11 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // installed packages
 const express_1 = __importDefault(require("express"));
-const { MongoClient, Collection } = require("mongodb");
+const { Db, MongoClient, Collection } = require("mongodb");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -46,11 +37,11 @@ client.connect((err) => {
     db = client.db("only-weights-app");
     collection = db.collection("users");
 });
-app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/register", async (req, res) => {
     // get variables from front
     const { name, email, password } = req.body;
     // hash password
-    const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
+    const hashedPassword = await bcryptjs_1.default.hash(password, 10);
     // find user in database using their email
     collection.findOne({ email: email }, (err, result) => {
         // general error check
@@ -77,15 +68,15 @@ app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* 
             res.json({ message: "User registered successfully" });
         });
     });
-}));
-app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
-    const user = yield collection.findOne({ email });
+    const user = await collection.findOne({ email });
     if (!user) {
         res.status(401).json({ message: "Email or password is incorrect" });
         return;
     }
-    const isMatch = yield bcryptjs_1.default.compare(password, user.password);
+    const isMatch = await bcryptjs_1.default.compare(password, user.password);
     if (!isMatch) {
         res.status(401).json({ message: "Email or password is incorrect" });
         return;
@@ -93,7 +84,7 @@ app.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const token = jsonwebtoken_1.default.sign({ email }, jwtToken, { expiresIn: "1h" });
     // send back user's token
     res.json({ token: token });
-}));
+});
 app.get("/api/user-data", (req, res) => {
     var _a;
     const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];

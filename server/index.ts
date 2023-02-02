@@ -1,11 +1,11 @@
 // installed packages
 import express, { Express, Request, Response } from "express";
-const { MongoClient, Collection } = require("mongodb");
+const { Db, MongoClient, Collection } = require("mongodb");
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import cors from "cors";
-const bodyParser = require("body-parser");
+import bodyParser = require("body-parser");
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ app.use(
 app.use(bodyParser.json());
 
 // MongoDB variables
-let db: any, collection: typeof Collection;
+let db: typeof Db, collection: typeof Collection;
 
 // mongodb setup
 const client = new MongoClient(uri, {
