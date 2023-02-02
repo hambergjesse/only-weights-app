@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // installed packages
 const express_1 = __importDefault(require("express"));
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Db, MongoClient, Collection } = require("mongodb");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));

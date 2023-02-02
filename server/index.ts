@@ -1,5 +1,6 @@
 // installed packages
 import express, { Express, Request, Response } from "express";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { Db, MongoClient, Collection } = require("mongodb");
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
