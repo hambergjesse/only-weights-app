@@ -57,13 +57,21 @@ app.post("/register", async (req: Request, res: Response) => {
 
   // find user in database using their email
   collection.findOne({ email: email }, (err: Error, result: Response) => {
+    // general error check
     if (err) {
       console.error(err);
       res.status(500).json({ message: "Error registering user" });
       return;
     }
+
+    // error message for duplicate email in db
     if (result) {
       res.status(400).json({ message: "Email already exists" });
+      return;
+    }
+
+    if (name.length > 20) {
+      res.status(400).json({ message: "First name is too long" });
       return;
     }
 
@@ -120,7 +128,7 @@ app.get("/api/user-data", (req: Request, res: Response) => {
         return;
       }
 
-      res.json({ _id: user._id, email: user.email, password: user.password });
+      res.json({ _id: user._id, email: user.email, name: user.name });
       console.log(user);
     });
   } catch (err) {

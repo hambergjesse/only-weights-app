@@ -53,13 +53,19 @@ app.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     // find user in database using their email
     collection.findOne({ email: email }, (err, result) => {
+        // general error check
         if (err) {
             console.error(err);
             res.status(500).json({ message: "Error registering user" });
             return;
         }
+        // error message for duplicate email in db
         if (result) {
             res.status(400).json({ message: "Email already exists" });
+            return;
+        }
+        if (name.length > 20) {
+            res.status(400).json({ message: "First name is too long" });
             return;
         }
         collection.insertOne({ email, password: hashedPassword, name }, (insertErr) => {
@@ -103,7 +109,7 @@ app.get("/api/user-data", (req, res) => {
                 res.status(500).json({ message: "Error retrieving user data" });
                 return;
             }
-            res.json({ _id: user._id, email: user.email, password: user.password });
+            res.json({ _id: user._id, email: user.email, name: user.name });
             console.log(user);
         });
     }

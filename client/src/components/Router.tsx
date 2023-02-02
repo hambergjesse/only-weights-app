@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import Home from "../pages-user/Home/Home";
+import Home from "../pages-user/Home/HomePage";
 
 // import auth + user data context
 import { useUserAuthContext } from "./ContextProvider";

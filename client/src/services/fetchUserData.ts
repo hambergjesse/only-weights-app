@@ -15,7 +15,7 @@ const useFetchUserData = () => {
         setUserData({
           _id: res.data._id,
           email: res.data.email,
-          password: res.data.password,
+          name: res.data.name,
         });
       } catch (err) {
         console.error(err);

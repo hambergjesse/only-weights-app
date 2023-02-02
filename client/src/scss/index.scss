@@ -4,10 +4,13 @@
 // import for fonts
 @import "./fonts";
 
-// import for page styling
+// import for start pages
 @import "../pages/LandingPage/landingpage";
 @import "../pages/LoginPage/loginpage";
 @import "../pages/RegisterPage/registerpage";
+
+// import for user pages
+@import "../pages-user/Home/homepage";
 
 // import for component styling
 @import "../components/Navigation/navigation";

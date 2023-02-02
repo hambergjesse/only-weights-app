@@ -17,26 +17,31 @@ const Navigation = () => {
               <NavLink to="/home">
                 <RiHome3Line className="react-icon" />
               </NavLink>
+              <p>Home</p>
             </li>
             <li className="navigation__container--nav-list-item">
               <NavLink to="/notes">
                 <RiFileList2Line className="react-icon" />
               </NavLink>
+              <p>Notes</p>
             </li>
             <li className="navigation__container--nav-list-item">
               <NavLink to="/store">
                 <AiOutlineShopping className="react-icon" />
               </NavLink>
+              <p>Store</p>
             </li>
             <li className="navigation__container--nav-list-item">
-              <NavLink to="/help">
+              <NavLink to="/profile">
                 <CgProfile className="react-icon" />
               </NavLink>
+              <p>Profile</p>
             </li>
             <li className="navigation__container--nav-list-item">
               <NavLink to="/help">
                 <FiHelpCircle className="react-icon" />
               </NavLink>
+              <p>Home</p>
             </li>
           </ul>
         </nav>

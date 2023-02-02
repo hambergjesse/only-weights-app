@@ -4,7 +4,7 @@ import React, { useState, useContext } from "react";
 export interface UserData {
   _id: string;
   email: string;
-  password: string;
+  name: string;
 }
 
 export interface DataContext {
@@ -16,7 +16,7 @@ const dataDefault: DataContext = {
   userData: {
     _id: "",
     email: "",
-    password: "",
+    name: "",
   },
   setUserData: () => {},
 };
