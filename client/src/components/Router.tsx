@@ -30,7 +30,7 @@ const PageRouter = (): JSX.Element => {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      {isAuth === true ? (
+      {isAuth === true && (
         <>
           <Route path="/home" element={<HomePage />} />
           <Route path="/notes" element={<NotesPage />} />
@@ -38,8 +38,6 @@ const PageRouter = (): JSX.Element => {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/help" element={<HelpPage />} />
         </>
-      ) : (
-        <Route path="/" element={<LandingPage />} />
       )}
       <Route path="*" element={<LandingPage />} />
     </Routes>
