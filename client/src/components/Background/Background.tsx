@@ -1,6 +1,6 @@
 import BackgroundIMG from "../../assets/landing-page-background.webp";
 
-export const Background = () => {
+export const Background = (): JSX.Element => {
   const preLoadImage = (new Image().src = BackgroundIMG);
 
   return (

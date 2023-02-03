@@ -7,7 +7,7 @@ import { CgProfile } from "react-icons/cg";
 // import react components
 import { NavLink } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (): JSX.Element => {
   return (
     <main className="navigation__wrapper">
       <div className="navigation__container">

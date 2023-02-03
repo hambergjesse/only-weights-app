@@ -7,7 +7,7 @@ import api from "../../../services/api";
 // import subcomponents
 import { Button } from "../../../components/Button/Button";
 
-export const RegisterForm = () => {
+export const RegisterForm = (): JSX.Element => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

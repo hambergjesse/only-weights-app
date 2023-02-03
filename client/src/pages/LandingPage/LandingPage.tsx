@@ -7,7 +7,7 @@ import { Button } from "../../components/Button/Button";
 import { Copyright } from "../../components/Copyright/Copyright";
 import { TextLogo } from "../../components/TextLogo/TextLogo";
 
-const LandingPage = () => {
+const LandingPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {

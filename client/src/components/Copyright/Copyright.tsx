@@ -1,4 +1,4 @@
-export const Copyright = () => {
+export const Copyright = (): JSX.Element => {
   // get current year
   const currYear = new Date().getFullYear();
   return (

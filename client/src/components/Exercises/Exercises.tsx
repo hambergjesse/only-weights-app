@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const Exercises = () => {
+export const Exercises = (): JSX.Element => {
   const apiKey: string = process.env.EXERCISE_API as string;
 
-  const exerciseApi = async (event: any) => {
+  const exerciseApi = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
       axios
@@ -16,6 +16,7 @@ export const Exercises = () => {
         .catch(function (error) {
           console.error("Error: ", error.response.data);
         });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.log("error");
     }

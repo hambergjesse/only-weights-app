@@ -6,12 +6,16 @@ import { useEffect } from "react";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import LandingPage from "../pages/LandingPage/LandingPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
-import Home from "../pages-user/Home/HomePage";
+import HomePage from "../pages-user/Home/HomePage";
 
 // import auth + user data context
 import { useUserAuthContext } from "./ContextProvider";
+import { NotesPage } from "../pages-user/Notes/NotesPage";
+import { StorePage } from "../pages-user/Store/StorePage";
+import { ProfilePage } from "../pages-user/Profile/ProfilePage";
+import { HelpPage } from "../pages-user/Help/HelpPage";
 
-const PageRouter: React.FC = () => {
+const PageRouter = (): JSX.Element => {
   const { isAuth, setIsAuth } = useUserAuthContext();
 
   useEffect(() => {
@@ -27,7 +31,13 @@ const PageRouter: React.FC = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       {isAuth === true ? (
-        <Route path="/home" element={<Home />} />
+        <>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/notes" element={<NotesPage />} />
+          <Route path="/store" element={<StorePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/help" element={<HelpPage />} />
+        </>
       ) : (
         <Route path="/" element={<LandingPage />} />
       )}

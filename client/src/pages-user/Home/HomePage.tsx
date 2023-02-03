@@ -11,7 +11,7 @@ import { Copyright } from "../../components/Copyright/Copyright";
 // import necessary hooks/functions
 import useFetchUserData from "../../services/fetchUserData";
 
-const Home = () => {
+const HomePage = (): JSX.Element => {
   const { userData } = useUserDataContext();
 
   // fetch user-data
@@ -47,4 +47,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -5,7 +5,7 @@ import { TextLogo } from "../../components/TextLogo/TextLogo";
 import { Copyright } from "../../components/Copyright/Copyright";
 import { RegisterForm } from "./RegisterForm/RegisterForm";
 
-const RegisterPage = () => {
+const RegisterPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -5,7 +5,7 @@ interface ButtonFace {
   type?: "button" | "submit" | "reset";
 }
 
-export const Button = (props: ButtonFace) => {
+export const Button = (props: ButtonFace): JSX.Element => {
   return (
     <button
       className="default-button"

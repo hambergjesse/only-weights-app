@@ -39,7 +39,7 @@ interface Children {
   children: React.ReactNode;
 }
 
-const UserProvider = ({ children }: Children) => {
+const UserProvider = ({ children }: Children): JSX.Element => {
   const [userData, setUserData] = useState<UserData>(dataDefault.userData);
   const [isAuth, setIsAuth] = useState(authDefault.isAuth);
 

@@ -8,7 +8,7 @@ import { TextLogo } from "../../components/TextLogo/TextLogo";
 import { Copyright } from "../../components/Copyright/Copyright";
 import { LoginForm } from "./LoginForm/LoginForm";
 
-const LoginPage: React.FC = () => {
+const LoginPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {

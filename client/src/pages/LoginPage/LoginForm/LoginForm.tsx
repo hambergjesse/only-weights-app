@@ -13,7 +13,7 @@ import { useUserAuthContext } from "../../../components/ContextProvider";
 // import subcomponents
 import { Button } from "../../../components/Button/Button";
 
-export const LoginForm = () => {
+export const LoginForm = (): JSX.Element => {
   // user auth context
   const { setIsAuth } = useUserAuthContext();
 
