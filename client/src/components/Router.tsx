@@ -11,7 +11,7 @@ import HomePage from "../pages-user/Home/HomePage";
 // import auth + user data context
 import { useUserAuthContext } from "./ContextProvider";
 import { NotesPage } from "../pages-user/Notes/NotesPage";
-import { StorePage } from "../pages-user/Store/StorePage";
+import { WorkoutPage } from "../pages-user/Workout/WorkoutPage";
 import { ProfilePage } from "../pages-user/Profile/ProfilePage";
 import { HelpPage } from "../pages-user/Help/HelpPage";
 
@@ -34,7 +34,7 @@ const PageRouter = (): JSX.Element => {
         <>
           <Route path="/home" element={<HomePage />} />
           <Route path="/notes" element={<NotesPage />} />
-          <Route path="/store" element={<StorePage />} />
+          <Route path="/workouts" element={<WorkoutPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/help" element={<HelpPage />} />
         </>

@@ -1,6 +1,6 @@
 // import navlink icons from react-icons
 import { RiFileList2Line, RiHome3Line } from "react-icons/ri";
-import { AiOutlineShopping } from "react-icons/ai";
+import { IoIosFitness } from "react-icons/io";
 import { FiHelpCircle } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 
@@ -26,10 +26,10 @@ const Navigation = (): JSX.Element => {
               <p>Notes</p>
             </li>
             <li className="navigation__container--nav-list-item">
-              <NavLink to="/store">
-                <AiOutlineShopping className="react-icon" />
+              <NavLink to="/workout">
+                <IoIosFitness className="react-icon" />
               </NavLink>
-              <p>Store</p>
+              <p>Workout</p>
             </li>
             <li className="navigation__container--nav-list-item">
               <NavLink to="/profile">
