@@ -6,7 +6,8 @@
 
   .navigation__container {
     background-color: $brand-main-nearly-black;
-    border-top: 2px solid $brand-main-dark;
+    border-top: 1.25px solid $brand-main;
+    border-radius: 15px 15px 0px 0px;
     padding: 6px 20px 6px 20px;
     height: 60px;
     width: 100%;
@@ -32,6 +33,7 @@
 
           p {
             font-size: $base-font-size-tiny;
+            color: $brand-link-disabled;
           }
 
           .react-icon {
