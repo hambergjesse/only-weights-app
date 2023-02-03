@@ -1,7 +1,7 @@
 interface ButtonFace {
   text?: string;
   disabled?: boolean;
-  onClick?: () => {} | void;
+  onClick?: () => object | void;
   type?: "button" | "submit" | "reset";
 }
 

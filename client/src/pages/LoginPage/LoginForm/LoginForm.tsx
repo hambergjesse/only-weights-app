@@ -24,7 +24,7 @@ export const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
       const response = await api.post("/login", {
@@ -50,6 +50,7 @@ export const LoginForm = () => {
       } catch (error) {
         console.log("user-data fetch and set func no worky");
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setError(err.response.data.message);
     }

@@ -16,7 +16,7 @@ export const RegisterForm = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: any) => {
+  const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
     // check if passwords match and then continue
@@ -37,6 +37,7 @@ export const RegisterForm = () => {
         }
 
         // redirect the user to the dashboard or some other protected route
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.response.data.message);
         console.log("data error");

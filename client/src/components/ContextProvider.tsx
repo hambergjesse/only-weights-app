@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState, useContext } from "react";
 
 // data context
@@ -36,7 +37,11 @@ const authDefault: AuthContext = {
 
 export const UserAuthContext = React.createContext(authDefault);
 
-const UserProvider = ({ children }: any) => {
+interface Children {
+  children: React.ReactNode;
+}
+
+const UserProvider = ({ children }: Children) => {
   const [userData, setUserData] = useState<UserData>(dataDefault.userData);
   const [isAuth, setIsAuth] = useState(authDefault.isAuth);
 
