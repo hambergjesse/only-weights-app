@@ -41,7 +41,7 @@ const Navigation = () => {
               <NavLink to="/help">
                 <FiHelpCircle className="react-icon" />
               </NavLink>
-              <p>Home</p>
+              <p>Help</p>
             </li>
           </ul>
         </nav>

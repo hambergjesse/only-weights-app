@@ -13,7 +13,6 @@ const useFetchUserData = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData({
-          _id: res.data._id,
           email: res.data.email,
           name: res.data.name,
         });
