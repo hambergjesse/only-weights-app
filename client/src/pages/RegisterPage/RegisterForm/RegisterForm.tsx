@@ -28,15 +28,10 @@ export const RegisterForm = (): JSX.Element => {
           password,
         });
 
-        // put token in local storage
-        localStorage.setItem("token", response.data.token);
+        console.log(response);
 
-        // check if local storage has the token and redirect to login
-        if (localStorage.getItem("token")) {
-          navigate("/login");
-        }
+        navigate("/login");
 
-        // redirect the user to the dashboard or some other protected route
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setError(err.response.data.message);

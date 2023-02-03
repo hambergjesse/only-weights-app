@@ -7,7 +7,7 @@ export const Exercises = (): JSX.Element => {
     event.preventDefault();
     try {
       axios
-        .get("https://api.api-ninjas.com/v1/exercises?muscle=*", {
+        .get("https://api.api-ninjas.com/v1/exercises", {
           headers: { "X-Api-Key": apiKey },
         })
         .then(function (response) {
