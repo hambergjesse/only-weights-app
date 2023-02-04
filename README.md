@@ -1,3 +1,6 @@
+![alt text](https://i.imgur.com/sKkzIul.png)
+<br><br>
+
 # OnlyWeights
 
 Welcome to the OnlyWeights project, an ultimate gym companion app designed to make workout routines easier and more efficient.
