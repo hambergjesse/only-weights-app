@@ -11,6 +11,8 @@ import bodyParser = require("body-parser");
 dotenv.config();
 
 const app: Express = express();
+
+// define .env stuff
 const port = process.env.PORT;
 const uri = process.env.MONGODB_URI;
 const jwtToken: string = process.env.JWT_SECRET as string;
@@ -71,11 +73,13 @@ app.post("/register", async (req: Request, res: Response) => {
       return;
     }
 
+    // check if name is too long
     if (name.length > 20) {
       res.status(400).json({ message: "First name is too long" });
       return;
     }
 
+    // send data to the database
     collection.insertOne(
       { email: email, password: hashedPassword, name: name, workouts: [] },
       (insertErr: Error) => {
@@ -91,20 +95,28 @@ app.post("/register", async (req: Request, res: Response) => {
 });
 
 app.post("/login", async (req: Request, res: Response) => {
+  // get variables from front
   const { email, password } = req.body;
+
+  // get user from database
   const user = await collection.findOne({ email });
 
+  // if user email doesn't exist return error
   if (!user) {
     res.status(401).json({ message: "Email or password is incorrect" });
     return;
   }
+
+  // check if the inputted and pre-existing passwords match
   const isMatch = await bcrypt.compare(password, user.password);
 
+  // if passwords do not match, return error
   if (!isMatch) {
     res.status(401).json({ message: "Email or password is incorrect" });
     return;
   }
 
+  // create token for succesful login
   const token = jwt.sign({ email }, jwtToken, { expiresIn: "1h" });
 
   // send back user's token
@@ -113,13 +125,16 @@ app.post("/login", async (req: Request, res: Response) => {
 
 // handle userdata connection between the front- and backend
 app.get("/api/user-data", (req: Request, res: Response) => {
+  // get user token from request
   const token = req.headers.authorization?.split(" ")[1];
 
+  // if no token, return error
   if (!token) {
     res.status(401).json({ message: "Invalid token" });
     return;
   }
 
+  // define the value types for a user object
   interface UserObj {
     _id: string;
     email: string;
@@ -128,8 +143,10 @@ app.get("/api/user-data", (req: Request, res: Response) => {
   }
 
   try {
+    // verify if token is valid
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
+    // find the data of the specific user
     collection.findOne(
       { email: decoded.email },
       (err: Error, user: UserObj) => {
@@ -151,14 +168,17 @@ app.get("/api/user-data", (req: Request, res: Response) => {
 
 // handle adding a new workout to a users data
 app.post("/api/add-workout", (req: Request, res: Response) => {
+  // get user token from request
   const token = req.headers.authorization?.split(" ")[1];
 
+  // if no token, return error
   if (!token) {
     res.status(401).json({ message: "Invalid token" });
     return;
   }
 
   try {
+    // verify if token is valid
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
     // find user with email
@@ -183,6 +203,7 @@ app.post("/api/add-workout", (req: Request, res: Response) => {
             return;
           }
 
+          // return success message to front
           res.json({ message: "Workout added successfully" });
         }
       );

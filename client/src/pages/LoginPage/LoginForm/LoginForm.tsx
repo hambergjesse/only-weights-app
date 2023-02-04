@@ -27,6 +27,7 @@ export const LoginForm = (): JSX.Element => {
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
     try {
+      // send inputted email and password to backend and wait for response
       const response = await api.post("/login", {
         email,
         password,

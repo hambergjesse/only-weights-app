@@ -22,6 +22,7 @@ export const RegisterForm = (): JSX.Element => {
     // check if passwords match and then continue
     if (password === confirmPassword) {
       try {
+        // send created user data to backend and wait for response
         const response = await api.post("/register", {
           name,
           email,

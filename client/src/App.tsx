@@ -9,13 +9,17 @@ import UserProvider from "./components/ContextProvider";
 import { Background } from "./components/Background/Background";
 
 const App = () => {
+  // location variable
   const location = useLocation();
+
+  // shorten for cleanness
   const path = location.pathname;
 
   return (
     <div className="app__wrapper">
       <UserProvider>
         <Router />
+        {/* Enable and disable background image for specific paths */}
         {path === "/" || path === "/home" ? <Background /> : <></>}
       </UserProvider>
     </div>

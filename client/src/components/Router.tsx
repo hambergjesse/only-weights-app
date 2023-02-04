@@ -18,6 +18,7 @@ import { HelpPage } from "../pages-user/Help/HelpPage";
 const PageRouter = (): JSX.Element => {
   const { isAuth, setIsAuth } = useUserAuthContext();
 
+  // check if token exists and enable auth accordingly
   useEffect(() => {
     if (localStorage.getItem("token")) {
       return setIsAuth(true);
