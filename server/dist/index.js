@@ -60,7 +60,7 @@ app.post("/register", async (req, res) => {
             res.status(400).json({ message: "First name is too long" });
             return;
         }
-        collection.insertOne({ email, password: hashedPassword, name }, (insertErr) => {
+        collection.insertOne({ email: email, password: hashedPassword, name: name, workouts: [] }, (insertErr) => {
             if (insertErr) {
                 console.error(insertErr);
                 res.status(500).json({ message: "Error registering user" });
@@ -86,6 +86,7 @@ app.post("/login", async (req, res) => {
     // send back user's token
     res.json({ token: token });
 });
+// handle userdata connection between the front- and backend
 app.get("/api/user-data", (req, res) => {
     var _a;
     const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
@@ -103,6 +104,41 @@ app.get("/api/user-data", (req, res) => {
             }
             // send userdata as a response obj to front
             res.json({ email: user.email, name: user.name });
+        });
+    }
+    catch (err) {
+        res.status(401).json({ message: "Invalid token" });
+        return;
+    }
+});
+// handle adding a new workout to a users data
+app.post("/api/add-workout", (req, res) => {
+    var _a;
+    const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+    if (!token) {
+        res.status(401).json({ message: "Invalid token" });
+        return;
+    }
+    try {
+        const decoded = jsonwebtoken_1.default.verify(token, jwtToken);
+        // find user with email
+        collection.findOne({ email: decoded.email }, (err) => {
+            if (err) {
+                console.error(err);
+                res.status(500).json({ message: "Error adding workout" });
+                return;
+            }
+            // get workout
+            const { workout } = req.body;
+            // update user's data by adding new workout
+            collection.updateOne({ email: decoded.email }, { $push: { workouts: workout } }, (updateErr) => {
+                if (updateErr) {
+                    console.error(updateErr);
+                    res.status(500).json({ message: "Error adding workout" });
+                    return;
+                }
+                res.json({ message: "Workout added successfully" });
+            });
         });
     }
     catch (err) {

@@ -77,7 +77,7 @@ app.post("/register", async (req: Request, res: Response) => {
     }
 
     collection.insertOne(
-      { email, password: hashedPassword, name },
+      { email: email, password: hashedPassword, name: name, workouts: [] },
       (insertErr: Error) => {
         if (insertErr) {
           console.error(insertErr);
@@ -111,6 +111,7 @@ app.post("/login", async (req: Request, res: Response) => {
   res.json({ token: token });
 });
 
+// handle userdata connection between the front- and backend
 app.get("/api/user-data", (req: Request, res: Response) => {
   const token = req.headers.authorization?.split(" ")[1];
 
@@ -142,6 +143,50 @@ app.get("/api/user-data", (req: Request, res: Response) => {
         res.json({ email: user.email, name: user.name });
       }
     );
+  } catch (err) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
+});
+
+// handle adding a new workout to a users data
+app.post("/api/add-workout", (req: Request, res: Response) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(token, jwtToken) as { email: string };
+
+    // find user with email
+    collection.findOne({ email: decoded.email }, (err: Error) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error adding workout" });
+        return;
+      }
+
+      // get workout
+      const { workout } = req.body;
+
+      // update user's data by adding new workout
+      collection.updateOne(
+        { email: decoded.email },
+        { $push: { workouts: workout } },
+        (updateErr: Error) => {
+          if (updateErr) {
+            console.error(updateErr);
+            res.status(500).json({ message: "Error adding workout" });
+            return;
+          }
+
+          res.json({ message: "Workout added successfully" });
+        }
+      );
+    });
   } catch (err) {
     res.status(401).json({ message: "Invalid token" });
     return;

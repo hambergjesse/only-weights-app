@@ -34,7 +34,7 @@ const PageRouter = (): JSX.Element => {
         <>
           <Route path="/home" element={<HomePage />} />
           <Route path="/notes" element={<NotesPage />} />
-          <Route path="/workouts" element={<WorkoutPage />} />
+          <Route path="/workout" element={<WorkoutPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/help" element={<HelpPage />} />
         </>
