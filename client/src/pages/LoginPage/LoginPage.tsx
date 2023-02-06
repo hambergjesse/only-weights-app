@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 //
 
@@ -9,14 +8,6 @@ import { Copyright } from "../../components/Copyright/Copyright";
 import { LoginForm } from "./LoginForm/LoginForm";
 
 const LoginPage = (): JSX.Element => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/home");
-    }
-  });
-
   return (
     <main className="loginPage__wrapper">
       <div className="loginPage__container">

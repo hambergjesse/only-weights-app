@@ -166,8 +166,41 @@ app.get("/api/user-data", (req: Request, res: Response) => {
   }
 });
 
+// verify if token exists and if it is the right one for logged in user
+app.get("/api/verify-token", (req: Request, res: Response) => {
+  // get user token from request
+  const token = req.headers.authorization?.split(" ")[1];
+  console.log(token);
+
+  // if no token, return error
+  if (!token) {
+    res.status(401).json({ isValid: false });
+    return;
+  }
+
+  try {
+    // verify if token is valid
+    const decoded = jwt.verify(token, jwtToken) as { email: string };
+
+    // check if user with the token exists
+    collection.findOne({ email: decoded.email }, (err: Error) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ isValid: false });
+        return;
+      }
+
+      res.json({ isValid: true });
+      return;
+    });
+  } catch (err) {
+    res.status(401).json({ isValid: false });
+    return;
+  }
+});
+
 // handle adding a new workout to a users data
-app.post("/api/add-workout", (req: Request, res: Response) => {
+/*app.post("/api/add-workout", (req: Request, res: Response) => {
   // get user token from request
   const token = req.headers.authorization?.split(" ")[1];
 
@@ -212,7 +245,7 @@ app.post("/api/add-workout", (req: Request, res: Response) => {
     res.status(401).json({ message: "Invalid token" });
     return;
   }
-});
+});*/
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

@@ -124,45 +124,83 @@ app.get("/api/user-data", (req, res) => {
         return;
     }
 });
-// handle adding a new workout to a users data
-app.post("/api/add-workout", (req, res) => {
+// verify if token exists and if it is the right one for logged in user
+app.get("/api/verify-token", (req, res) => {
     var _a;
     // get user token from request
     const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+    console.log(token);
     // if no token, return error
     if (!token) {
-        res.status(401).json({ message: "Invalid token" });
+        res.status(401).json({ isValid: false });
         return;
     }
     try {
         // verify if token is valid
         const decoded = jsonwebtoken_1.default.verify(token, jwtToken);
-        // find user with email
+        // check if user with the token exists
         collection.findOne({ email: decoded.email }, (err) => {
             if (err) {
                 console.error(err);
-                res.status(500).json({ message: "Error adding workout" });
+                res.status(500).json({ isValid: false });
                 return;
             }
-            // get workout
-            const { workout } = req.body;
-            // update user's data by adding new workout
-            collection.updateOne({ email: decoded.email }, { $push: { workouts: workout } }, (updateErr) => {
-                if (updateErr) {
-                    console.error(updateErr);
-                    res.status(500).json({ message: "Error adding workout" });
-                    return;
-                }
-                // return success message to front
-                res.json({ message: "Workout added successfully" });
-            });
+            res.json({ isValid: true });
+            return;
         });
     }
     catch (err) {
-        res.status(401).json({ message: "Invalid token" });
+        res.status(401).json({ isValid: false });
         return;
     }
 });
+// handle adding a new workout to a users data
+/*app.post("/api/add-workout", (req: Request, res: Response) => {
+  // get user token from request
+  const token = req.headers.authorization?.split(" ")[1];
+
+  // if no token, return error
+  if (!token) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
+
+  try {
+    // verify if token is valid
+    const decoded = jwt.verify(token, jwtToken) as { email: string };
+
+    // find user with email
+    collection.findOne({ email: decoded.email }, (err: Error) => {
+      if (err) {
+        console.error(err);
+        res.status(500).json({ message: "Error adding workout" });
+        return;
+      }
+
+      // get workout
+      const { workout } = req.body;
+
+      // update user's data by adding new workout
+      collection.updateOne(
+        { email: decoded.email },
+        { $push: { workouts: workout } },
+        (updateErr: Error) => {
+          if (updateErr) {
+            console.error(updateErr);
+            res.status(500).json({ message: "Error adding workout" });
+            return;
+          }
+
+          // return success message to front
+          res.json({ message: "Workout added successfully" });
+        }
+      );
+    });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid token" });
+    return;
+  }
+});*/
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
     client.close();

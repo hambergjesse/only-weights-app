@@ -7,16 +7,10 @@ import { useNavigate } from "react-router-dom";
 // import api
 import api from "../../../services/api";
 
-// import context for session/router auth + data
-import { useUserAuthContext } from "../../../components/ContextProvider";
-
 // import subcomponents
 import { Button } from "../../../components/Button/Button";
 
 export const LoginForm = (): JSX.Element => {
-  // user auth context
-  const { setIsAuth } = useUserAuthContext();
-
   // form input states
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -36,16 +30,7 @@ export const LoginForm = (): JSX.Element => {
       // send token to localstorage
       localStorage.setItem("token", response.data.token);
 
-      // if no token => login page || if token => home page
-      if (!localStorage.getItem("token")) {
-        setIsAuth(false);
-        navigate("/");
-      }
-
       try {
-        // enable auth for protected routes
-        setIsAuth(true);
-
         // send user to home page
         navigate("/home");
       } catch (error) {

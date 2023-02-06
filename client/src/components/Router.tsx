@@ -1,6 +1,9 @@
 // import react depencies
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+
+// import api
+import api from "../services/api";
 
 // import page components
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
@@ -18,19 +21,57 @@ import { HelpPage } from "../pages-user/Help/HelpPage";
 const PageRouter = (): JSX.Element => {
   const { isAuth, setIsAuth } = useUserAuthContext();
 
+  // path change variable
+  const navigate = useNavigate();
+
+  // location variable
+  const location = useLocation();
+
+  // shorten for cleanness
+  const path = location.pathname;
+
+  // get token
+  const token = localStorage.getItem("token");
+
   // check if token exists and enable auth accordingly
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      return setIsAuth(true);
+    const verifyToken = async () => {
+      try {
+        const response = await api.get("/api/verify-token", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.data.isValid) {
+          setIsAuth(true);
+        } else {
+          setIsAuth(false);
+        }
+      } catch (error) {
+        setIsAuth(false);
+      }
+    };
+
+    verifyToken();
+  }, [token, path]);
+
+  useEffect(() => {
+    if (
+      isAuth === true &&
+      (path === "/" || path === "/login" || path === "/register")
+    ) {
+      navigate("/home");
     }
-    return setIsAuth(false);
-  }, [isAuth, setIsAuth]);
+  }, [isAuth, path, navigate]);
 
   return (
-    <Routes key={useLocation().pathname} location={useLocation()}>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+    <Routes key={path} location={useLocation()}>
+      {isAuth === false && (
+        <>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </>
+      )}
       {isAuth === true && (
         <>
           <Route path="/home" element={<HomePage />} />

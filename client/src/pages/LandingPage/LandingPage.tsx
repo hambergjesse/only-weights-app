@@ -1,6 +1,5 @@
 // import react dependencies
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 // import components
 import { Button } from "../../components/Button/Button";
@@ -9,12 +8,6 @@ import { TextLogo } from "../../components/TextLogo/TextLogo";
 
 const LandingPage = (): JSX.Element => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate("/home");
-    }
-  });
 
   return (
     <main className="landingPage__wrapper">
