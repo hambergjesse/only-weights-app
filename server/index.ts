@@ -170,7 +170,6 @@ app.get("/api/user-data", (req: Request, res: Response) => {
 app.get("/api/verify-token", (req: Request, res: Response) => {
   // get user token from request
   const token = req.headers.authorization?.split(" ")[1];
-  console.log(token);
 
   // if no token, return error
   if (!token) {

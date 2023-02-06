@@ -129,7 +129,6 @@ app.get("/api/verify-token", (req, res) => {
     var _a;
     // get user token from request
     const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
-    console.log(token);
     // if no token, return error
     if (!token) {
         res.status(401).json({ isValid: false });
