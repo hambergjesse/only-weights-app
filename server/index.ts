@@ -140,6 +140,7 @@ app.get("/api/user-data", (req: Request, res: Response) => {
     email: string;
     password: string;
     name: string;
+    workouts: [];
   }
 
   try {
@@ -157,7 +158,11 @@ app.get("/api/user-data", (req: Request, res: Response) => {
         }
 
         // send userdata as a response obj to front
-        res.json({ email: user.email, name: user.name });
+        res.json({
+          email: user.email,
+          name: user.name,
+          workouts: user.workouts,
+        });
       }
     );
   } catch (err) {
@@ -199,52 +204,52 @@ app.get("/api/verify-token", (req: Request, res: Response) => {
 });
 
 // handle adding a new workout to a users data
-/*app.post("/api/add-workout", (req: Request, res: Response) => {
-  // get user token from request
-  const token = req.headers.authorization?.split(" ")[1];
-
-  // if no token, return error
-  if (!token) {
-    res.status(401).json({ message: "Invalid token" });
-    return;
-  }
-
+app.post("/api/add-workout", async (req, res) => {
   try {
-    // verify if token is valid
+    // Get user token from request
+    const token = req.headers.authorization?.split(" ")[1];
+
+    // If no token, return error
+    if (!token) {
+      res.status(401).json({ message: "Invalid token" });
+      return;
+    }
+
+    // Verify if token is valid
     const decoded = jwt.verify(token, jwtToken) as { email: string };
 
-    // find user with email
-    collection.findOne({ email: decoded.email }, (err: Error) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ message: "Error adding workout" });
-        return;
-      }
+    // Find user with email
+    const user = await collection.findOne({ email: decoded.email });
 
-      // get workout
-      const { workout } = req.body;
+    // If user not found, return error
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+      return;
+    }
 
-      // update user's data by adding new workout
-      collection.updateOne(
-        { email: decoded.email },
-        { $push: { workouts: workout } },
-        (updateErr: Error) => {
-          if (updateErr) {
-            console.error(updateErr);
-            res.status(500).json({ message: "Error adding workout" });
-            return;
-          }
+    // Get workout data from request body
+    const { workout } = req.body;
+    console.log({ workout });
 
-          // return success message to front
-          res.json({ message: "Workout added successfully" });
-        }
-      );
-    });
+    // Update user's data by adding new workout
+    const result = await collection.updateOne(
+      { email: decoded.email },
+      { $push: { workouts: { workout } } }
+    );
+
+    // If update was not successful, return error
+    if (!result.modifiedCount) {
+      res.status(500).json({ message: "Error adding workout" });
+      return;
+    }
+
+    // Return success message to client
+    res.json({ message: "Workout added successfully" });
   } catch (err) {
     res.status(401).json({ message: "Invalid token" });
     return;
   }
-});*/
+});
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

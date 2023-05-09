@@ -18,6 +18,8 @@ const HomePage = (): JSX.Element => {
   // fetch user-data
   useFetchUserData();
 
+  console.table(userData);
+
   return (
     <main className="homePage__wrapper">
       <div className="homePage__container">

@@ -20,7 +20,9 @@ const useFetchUserData = () => {
         setUserData({
           email: res.data.email,
           name: res.data.name,
+          workouts: res.data.workouts,
         });
+        console.table(res.data.workouts);
       } catch (err) {
         console.error(err);
       }

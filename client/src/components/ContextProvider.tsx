@@ -2,9 +2,21 @@
 import React, { useState, useContext } from "react";
 
 // data context
+interface Exercise {
+  name: string;
+  reps: number;
+  sets: number;
+  notes: string;
+}
+
+interface Workout {
+  exercises: Exercise[];
+}
+
 export interface UserData {
   email: string;
   name: string;
+  workouts: Workout[];
 }
 
 export interface DataContext {
@@ -16,6 +28,7 @@ const dataDefault: DataContext = {
   userData: {
     email: "",
     name: "",
+    workouts: [],
   },
   setUserData: () => {},
 };
