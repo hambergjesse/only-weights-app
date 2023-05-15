@@ -7,13 +7,14 @@ import useFetchUserData from "../../services/fetchUserData";
 import api from "../../services/api";
 
 type Exercise = {
-	name: string;
+	exName: string;
 	reps: number;
 	sets: number;
 	notes?: string;
 };
 
 type Workout = {
+	title: string;
 	exercises: Exercise[];
 };
 
@@ -35,11 +36,16 @@ const createWorkout = async (workout: Workout, token: string) => {
 
 export const WorkoutPage = (): JSX.Element => {
 	const [exercises, setExercises] = useState<Exercise[]>([]);
-	const [name, setName] = useState<string>("");
+	const [title, setTitle] = useState<string>("");
+	const [exName, setExName] = useState<string>("");
 	const [reps, setReps] = useState<string>("");
 	const [sets, setSets] = useState<string>("");
-	const [notes, setNotes] = useState<string>(""); // Make sure to set the initial state for notes as an empty string
+	const [notes, setNotes] = useState<string>("");
 	const [saving, setSaving] = useState<boolean>(false);
+
+	const [toggleCreator, setToggleCreator] = useState<boolean>(false);
+
+	console.log(title);
 
 	// fetch user-data
 	useFetchUserData();
@@ -48,13 +54,13 @@ export const WorkoutPage = (): JSX.Element => {
 		e.preventDefault();
 
 		const newExercise: Exercise = {
-			name,
+			exName,
 			reps: parseInt(reps),
 			sets: parseInt(sets),
 			notes,
 		};
 		setExercises([...exercises, newExercise]);
-		setName("");
+		setExName("");
 		setReps("");
 		setSets("");
 		setNotes("");
@@ -63,7 +69,8 @@ export const WorkoutPage = (): JSX.Element => {
 	const handleSaveWorkout = async () => {
 		setSaving(true);
 		const workout: Workout = {
-			exercises: [...exercises], // Make sure to pass the array of exercises inside an object with the "exercises" property
+			title: title,
+			exercises: [...exercises],
 		};
 		try {
 			const token = localStorage.getItem("token");
@@ -74,7 +81,9 @@ export const WorkoutPage = (): JSX.Element => {
 			console.table(workout);
 			console.log(token);
 
+			// fetch user-data
 			setExercises([]);
+			setTitle("");
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -87,59 +96,16 @@ export const WorkoutPage = (): JSX.Element => {
 
 	return (
 		<main className="workoutPage__wrapper">
-			<h1>My Workouts</h1>
 			<div className="workoutPage__container">
-				<h2>Create New Workout</h2>
-				<form id="addForm" onSubmit={handleAddExercise}>
-					<label htmlFor="">Name:</label>
-					<input
-						type="text"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-					/>
-					<label htmlFor="">Reps:</label>
-					<input
-						type="number"
-						value={reps}
-						onChange={(e) => setReps(e.target.value)}
-					/>
-					<label htmlFor="">Sets:</label>
-					<input
-						type="number"
-						value={sets}
-						onChange={(e) => setSets(e.target.value)}
-					/>
-					<label htmlFor="">Notes:</label>
-					<input
-						type="text"
-						value={notes}
-						onChange={(e) => setNotes(e.target.value)}
-					/>
-					<button type="submit" form="addForm" value="Submit">
-						Add Exercise
-					</button>
-				</form>
-				{exercises.map((exercise, index) => (
-					<div key={index}>
-						<h3>{exercise.name}</h3>
-						<p>
-							{exercise.reps} x {exercise.sets}
-						</p>
-						<p>{exercise.notes}</p>
-					</div>
-				))}
-				<button onClick={handleSaveWorkout} disabled={saving}>
-					{saving ? "Saving..." : "Save Workout"}
-				</button>
-				<h2>My Workouts</h2>
+				<h1>Saved workouts</h1>
 				<section className="workoutPage__list">
 					{userData?.workouts && userData.workouts.length > 0 ? (
 						userData?.workouts.map((workout: Workout, index: number) => (
 							<div className="workoutPage__list--item" key={index}>
-								<h3>temp name</h3>
+								<h2>{workout.title}</h2>
 								{workout?.exercises.map((exercise: Exercise, index: number) => (
 									<div key={index}>
-										<p>{exercise.name}</p>
+										<h3>{exercise.exName}</h3>
 										<p>
 											{exercise.reps} x {exercise.sets}
 										</p>
@@ -149,9 +115,74 @@ export const WorkoutPage = (): JSX.Element => {
 							</div>
 						))
 					) : (
-						<></>
+						<p>Created workouts will be displayed here.</p>
 					)}
 				</section>
+				<button
+					style={{ border: "1px solid #ffa600" }}
+					onClick={() => setToggleCreator(!toggleCreator)}
+				>
+					{toggleCreator === false ? "Create New Workout" : "Stop Creating"}
+				</button>
+				{toggleCreator && (
+					<section className="workoutPage__create">
+						<h2>Create New Workout</h2>
+						<label htmlFor="">Workout title:</label>
+						<input
+							type="text"
+							value={title}
+							onChange={(e) => setTitle(e.target.value)}
+						/>
+						<form id="addForm" onSubmit={handleAddExercise}>
+							<label htmlFor="">Exercise name:</label>
+							<input
+								type="text"
+								value={exName}
+								onChange={(e) => setExName(e.target.value)}
+							/>
+							<div className="workoutPage__create--numbers">
+								<div>
+									<label htmlFor="">Reps:</label>
+									<input
+										type="number"
+										value={reps}
+										onChange={(e) => setReps(e.target.value)}
+									/>
+								</div>
+								<p>x</p>
+								<div>
+									<label htmlFor="">Sets:</label>
+									<input
+										type="number"
+										value={sets}
+										onChange={(e) => setSets(e.target.value)}
+									/>
+								</div>
+							</div>
+							<label htmlFor="">Notes:</label>
+							<textarea
+								value={notes}
+								onChange={(e) => setNotes(e.target.value)}
+							/>
+							<button type="submit" form="addForm" value="Submit">
+								Add Exercise
+							</button>
+						</form>
+						<h3>{title}</h3>
+						{exercises.map((exercise, index) => (
+							<div key={index}>
+								<h3>{exercise.exName}</h3>
+								<p>
+									{exercise.reps} x {exercise.sets}
+								</p>
+								<p>{exercise.notes}</p>
+							</div>
+						))}
+						<button onClick={handleSaveWorkout} disabled={saving}>
+							{saving ? "Saving..." : "Save Workout"}
+						</button>
+					</section>
+				)}
 			</div>
 			<Navigation />
 		</main>

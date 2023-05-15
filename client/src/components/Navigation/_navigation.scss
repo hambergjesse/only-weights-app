@@ -1,47 +1,47 @@
 .navigation__wrapper {
-  position: absolute;
-  display: flex;
-  width: 100%;
-  bottom: 0;
+	position: sticky;
+	display: flex;
+	width: 100%;
+	bottom: 0;
 
-  .navigation__container {
-    background-color: $brand-main-nearly-black;
-    border-top: 1.25px solid $brand-main;
-    border-radius: 15px 15px 0px 0px;
-    padding: 6px 20px 6px 20px;
-    height: 60px;
-    width: 100%;
+	.navigation__container {
+		background-color: $brand-main-nearly-black;
+		border-top: 1.25px solid $brand-main;
+		border-radius: 15px 15px 0px 0px;
+		padding: 6px 20px 6px 20px;
+		height: 60px;
+		width: 100%;
 
-    .navigation__container--nav {
-      height: 100%;
+		.navigation__container--nav {
+			height: 100%;
 
-      .navigation__container--nav-list {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-        width: 100%;
+			.navigation__container--nav-list {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				height: 100%;
+				width: 100%;
 
-        .navigation__container--nav-list-item {
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-          height: 100%;
-          width: 30px;
-          gap: 3px;
+				.navigation__container--nav-list-item {
+					display: flex;
+					justify-content: center;
+					flex-direction: column;
+					align-items: center;
+					height: 100%;
+					width: 30px;
+					gap: 3px;
 
-          p {
-            font-size: $base-font-size-tiny;
-            color: $brand-link-disabled;
-          }
+					p {
+						font-size: $base-font-size-tiny;
+						color: $brand-link-disabled;
+					}
 
-          .react-icon {
-            height: 100%;
-            width: 100%;
-          }
-        }
-      }
-    }
-  }
+					.react-icon {
+						height: 100%;
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
 }

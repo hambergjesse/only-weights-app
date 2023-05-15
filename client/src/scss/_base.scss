@@ -21,87 +21,86 @@ $main-font-family-titles: citrus-gothic, sans-serif;
 $main-font-family-subtext: Corbel, sans-serif;
 
 * {
-  margin: 0px;
-  padding: 0px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
-  scroll-behavior: smooth;
-  text-rendering: optimizeLegibility !important;
-  -webkit-font-smoothing: antialiased !important;
+	margin: 0px;
+	padding: 0px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
 }
 
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-  outline: none;
+	outline: none;
 }
 
 button,
 input {
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
-  line-height: normal;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
-  font-family: $main-font-family-titles;
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	overflow: visible;
+	background: transparent;
+	line-height: normal;
+	-webkit-font-smoothing: inherit;
+	-moz-osx-font-smoothing: inherit;
+	-webkit-appearance: none;
+	font-family: $main-font-family-titles;
 }
 
 html {
-  body {
-    overflow-x: hidden;
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background: $brand-main-nearly-black;
+	body {
+		overflow-x: hidden;
+		position: relative;
+		width: 100vw;
+		height: 100vh;
+		background: $brand-main-nearly-black;
 
-    // disable scroll
-    overflow-x: hidden;
-    overflow-y: hidden;
+		// disable scroll
+		overflow-x: hidden;
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: $brand-main-white;
-      font-family: $main-font-family-titles;
-    }
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: $brand-main-white;
+			font-family: $main-font-family-titles;
+		}
 
-    textarea,
-    select,
-    input,
-    label,
-    li,
-    p,
-    a {
-      color: $brand-main-white;
-      font-family: $main-font-family-subtext;
-      font-size: $base-font-size-mobile;
-    }
+		textarea,
+		select,
+		input,
+		label,
+		li,
+		p,
+		a {
+			color: $brand-main-white;
+			font-family: $main-font-family-subtext;
+			font-size: $base-font-size-mobile;
+		}
 
-    img {
-      max-width: 100%;
-    }
-  }
+		img {
+			max-width: 100%;
+		}
+	}
 }
 
 .app__wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
 }
 
 .error-text {
-  color: $brand-error-text !important;
+	color: $brand-error-text !important;
 }

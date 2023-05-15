@@ -4,24 +4,27 @@
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
 
 	.workoutPage__container {
 		display: flex;
 		flex-direction: column;
+		padding: 40px;
+		padding-bottom: 80px;
+		min-height: 100vh;
+		height: 100%;
+		width: 100%;
+		gap: 25px;
 
-		form {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			gap: 10px;
-
-			input {
-				background: none;
-				text-align: center;
-				padding: 6px;
-				border: 1.5px solid $brand-main;
-			}
+		input {
+			background: none;
+			text-align: center;
+			padding: 6px;
+			border-radius: 15px;
+			border: 1.5px solid $brand-main;
+			width: 100%;
 		}
 
 		button {
@@ -33,19 +36,71 @@
 
 		.workoutPage__list {
 			display: flex;
-			flex-direction: column;
 			justify-content: center;
-			align-items: center;
+			align-items: flex-start;
+			flex-wrap: wrap;
+			width: 100%;
 			gap: 12px;
 
 			.workoutPage__list--item {
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
+				justify-content: flex-start;
 				align-items: center;
 				border: 1px solid grey;
+				border-radius: 15px;
 				padding: 12px;
+				height: auto;
+				width: 240px;
 				gap: 6px;
+			}
+		}
+
+		.workoutPage__create {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			gap: 12px;
+
+			form {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				gap: 10px;
+			}
+
+			textarea {
+				background: none;
+				text-align: center;
+				border: 1.5px solid $brand-main;
+				border-radius: 15px;
+				min-height: 100px;
+				max-height: 200px;
+				padding: 6px;
+				width: 100%;
+			}
+
+			.workoutPage__create--numbers {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				width: 100%;
+				gap: 12px;
+
+				div {
+					display: flex;
+					flex-direction: column;
+					width: 100%;
+					gap: 6px;
+				}
+			}
+
+			button:last-of-type {
+				width: 100%;
 			}
 		}
 	}
