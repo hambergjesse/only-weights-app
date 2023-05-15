@@ -5,15 +5,15 @@
 @import "./fonts";
 
 // import for start pages
-@import "../pages/LandingPage/landingpage";
-@import "../pages/LoginPage/loginpage";
-@import "../pages/RegisterPage/registerpage";
+@import "../pages/Landing/landingpage";
+@import "../pages/Login/loginpage";
+@import "../pages/Register/registerpage";
 
 // import for user pages
-@import "../pages-user/Home/homepage";
-@import "../pages-user/Notes/notespage";
-@import "../pages-user/Workout/workoutpage";
-@import "../pages-user/Profile/profilepage";
+@import "../pages/Home/homepage";
+@import "../pages/Notes/notespage";
+@import "../pages/Workout/workoutpage";
+@import "../pages/Profile/profilepage";
 
 // import for component styling
 @import "../components/Navigation/navigation";

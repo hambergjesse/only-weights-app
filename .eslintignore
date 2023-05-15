@@ -1,0 +1,14 @@
+# Ignore built files
+build/
+
+# Ignore test files
+**/__tests__/**
+
+# Ignore a specific file
+.eslintrc.js
+*.test.js
+*.test.ts
+node_modules/
+server/dist/
+server/node_modules/
+client/node_modules/

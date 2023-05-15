@@ -2,7 +2,7 @@
   "name": "only-weights-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.tsnpm run dev",
+  "main": "index.ts npm run dev",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/index.js",
