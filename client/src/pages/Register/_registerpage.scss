@@ -1,61 +1,65 @@
 .registerPage__wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 100%;
 
-  .registerPage__container {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    height: 100%;
-    width: 100%;
+	.registerPage__container {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+		align-items: center;
+		padding: 40px 0px;
+		height: 100%;
+		width: 100%;
 
-    .registerForm__container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
+		.registerForm__container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 15px;
 
-      p:first-of-type {
-        color: $brand-main;
-      }
+			p:first-of-type {
+				color: $brand-main;
+			}
 
-      button {
-        color: $brand-main-white;
-        font-family: $main-font-family-subtext;
-        font-weight: normal;
-        border: 1.25px solid $brand-main;
-        margin-top: 30px;
-      }
+			button {
+				color: $brand-main-white;
+				font-family: $main-font-family-subtext;
+				font-weight: normal;
+				border: 1.25px solid $brand-main;
+				margin-top: 30px;
+			}
 
-      p:last-of-type {
-        color: $brand-link-disabled;
-        a {
-          color: $brand-main;
-          font-weight: bold;
-        }
-      }
+			p:last-of-type {
+				color: $brand-link-disabled;
+				a {
+					color: $brand-main;
+					font-weight: bold;
+				}
+			}
 
-      form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
+			form {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 10px;
 
-        input {
-          background: none;
-          text-align: center;
-          width: 310px;
-          height: 50px;
-          border-bottom: 1.5px solid $brand-main;
-        }
-      }
-    }
-  }
+				input {
+					background: none;
+					text-align: center;
+					width: 280px;
+					height: 50px;
+					border-bottom: 1.5px solid $brand-main;
+				}
+
+				button {
+					width: 280px;
+				}
+			}
+		}
+	}
 }
